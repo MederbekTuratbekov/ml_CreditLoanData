@@ -3,10 +3,14 @@ import joblib
 from pydantic import BaseModel
 from fastapi import FastAPI
 from pyexpat import features
+from pathlib import Path
 
 
-model = joblib.load('model.pkl')
-scaler = joblib.load('scaler.pkl')
+
+BASE_DIR = Path(__file__).parent
+
+model = joblib.load(BASE_DIR / 'model.pkl')
+scaler = joblib.load(BASE_DIR / 'scaler.pkl')
 
 app = FastAPI()
 
