@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (ml_credit)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (ml_credit)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (ml_credit_loan_data)" project-jdk-type="Python SDK" />
 </project>
