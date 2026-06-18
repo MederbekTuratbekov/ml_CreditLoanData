@@ -1,0 +1,88 @@
+{
+  "person_age": 22,
+  "person_income": 71948.0,
+  "person_emp_exp": 0,
+  "person_home_ownership": "RENT",
+  "loan_amnt": 35000,
+  "loan_int_rate": 16.0,
+  "credit_score": 561
+}
+ожидаемый ответ: 1
+{
+  "loan_status": "Банк отклонил выдачу кредита",
+  "probability_of_approval": "Вероятность одобрения банка: 12.45%"
+}
+
+
+
+
+{
+  "person_age": 21,
+  "person_income": 12282.0,
+  "person_emp_exp": 0,
+  "person_home_ownership": "OWN",
+  "loan_amnt": 1000,
+  "loan_int_rate": 11.14,
+  "credit_score": 504
+}
+ожидаемый ответ: 0
+{
+  "loan_status": "Банк одобрил выдачу кредита",
+  "probability_of_approval": "Вероятность одобрения банка: 87.52%"
+}
+
+
+
+
+
+{
+  "person_age": 25,
+  "person_income": 12438.0,
+  "person_emp_exp": 3,
+  "person_home_ownership": "MORTGAGE",
+  "loan_amnt": 5500.0,
+  "loan_int_rate": 12.87,
+  "credit_score": 635
+}
+ожидаемый ответ: 1
+{
+  "loan_status": "Банк отклонил выдачу кредита",
+  "probability_of_approval": "Вероятность одобрения банка: 18.23%"
+}
+
+
+
+
+
+{
+  "person_age": 23,
+  "person_income": 79753.0,
+  "person_emp_exp": 0,
+  "person_home_ownership": "RENT",
+  "loan_amnt": 35000.0,
+  "loan_int_rate": 15.23,
+  "credit_score": 675
+}
+ожидаемый ответ: 1
+{
+  "loan_status": "Банк отклонил выдачу кредита",
+  "probability_of_approval": "Вероятность одобрения банка: 19.85%"
+}
+
+
+
+
+{
+  "person_age": 24,
+  "person_income": 66135.0,
+  "person_emp_exp": 1,
+  "person_home_ownership": "RENT",
+  "loan_amnt": 35000.0,
+  "loan_int_rate": 14.27,
+  "credit_score": 586
+}
+ожидаемый ответ: 1
+{
+  "loan_status": "Банк отклонил выдачу кредита",
+  "probability_of_approval": "Вероятность одобрения банка: 9.15%"
+}

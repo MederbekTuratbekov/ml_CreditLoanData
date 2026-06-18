@@ -1,11 +1,8 @@
-import uvicorn
-import joblib
-from pydantic import BaseModel
-from fastapi import FastAPI
-from pyexpat import features
 from pathlib import Path
-
-
+import joblib
+from fastapi import FastAPI
+from pydantic import BaseModel
+import uvicorn
 
 BASE_DIR = Path(__file__).parent
 
@@ -14,7 +11,8 @@ scaler = joblib.load(BASE_DIR / 'scaler_CreditLoanData.pkl')
 
 app = FastAPI()
 
-in_home = ['OTHER', 'OWN', 'RENT']
+IN_HOME = ['OTHER', 'OWN', 'RENT']
+
 
 class PersonSchema(BaseModel):
     person_age: int
@@ -25,27 +23,33 @@ class PersonSchema(BaseModel):
     loan_int_rate: float
     credit_score: int
 
-    class Config:
-        from_attributes = True
 
 @app.post('/predict/')
 async def predict(person: PersonSchema):
-    person_dict = dict(person)
+    home_encoded = [1 if person.person_home_ownership == home_type else 0 for home_type in IN_HOME]
 
-    new_home = person_dict.pop('person_home_ownership')
-    home1_0 = [1 if new_home == i else 0 for i in in_home]
+    features_list = [
+                        person.person_age,
+                        person.person_income,
+                        person.person_emp_exp,
+                        person.loan_amnt,
+                        person.loan_int_rate,
+                        person.credit_score
+                    ] + home_encoded
 
-    new_data = list(person_dict.values()) + home1_0
-    scaled_date = scaler.transform([new_data])
-    prediction = model.predict(scaled_date)[0]
-    proba = model.predict_proba(scaled_date)[0][1]
+    scaled_data = scaler.transform([features_list])
+    prediction = model.predict(scaled_data)[0]
+    proba = model.predict_proba(scaled_data)[0][1]
 
-    the_banks_response = 'Банк одобрил выдачу кредита' if prediction == 1 else 'Банк отклонил выдачу кредита'
-    probability_of_approval = f'Вероятность одобрения банка: {round(proba * 100, 2)}%'
+    the_banks_response = 'Банк одобрил выдачу кредита' if prediction == 0 else 'Банк отклонил выдачу кредита'
+    proba_approval = model.predict_proba(scaled_data)[0][0]
+    probability_of_approval = f'Вероятность одобрения банка: {round(proba_approval * 100, 2)}%'
+
     return {
         'loan_status': the_banks_response,
         'probability_of_approval': probability_of_approval
     }
+
 
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.0.1', port=8000)
